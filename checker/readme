@@ -1,0 +1,81 @@
+				CAZAN BOGDA MARIAN 313CB
+
+				TEMA 3 -- IMAGE PROCESSING
+
+		Scurta introducere:
+
+	Pentru a rezolva toata tema, am avut nevoie sa citesc poza si detaliile
+despre poze(a.k.a fileheader) pentru fiecare task in parte(in loc sa fac de 
+fiecare data o copie a pozei, am preferat sa o citesc de atatea ori de la bitul
+de offset).
+
+	Pentru citirea unei poze, am folosit functiile read_data, pentru citirea
+datelor din fileheader, respeciv infoheader, si read_physicalImage, pentru citirea
+efectiva a pixelilor, dupa codul rgb, sarind peste paddingul nedorit.
+	Pentru afisarea fileheaderului si a infoheaderului, avem functia print,
+iar pentru a afisa pixelii dintr-o matrice, exista functia print_physicalImage.
+
+		TASK 1
+
+	Pentru acest task avem o functie separata, numita explicit blackAndWhite,
+in care facem media aritmetica pentru fiecare pixel(media aritmetica a codurilor
+rbg), pentru ca mai apoi sa inlocuim valoarea de la pixelul initial cu noua 
+valoare obtinuta.
+
+		TASK 2
+
+	Implementarea unei functii de noCrop presupune doua mari cazuri:
+1)  Cazul in care inaltimea este mai mica decat latimea, caz banal, in care tot 
+ceea ce trebuie facut este sa "umplem" liniile ramase sus si jos cu 0, adica 
+codul culorii "alb"(nonculoare mai exact).
+2)  Cazul in care inaltimea este mai mare decat latimea, caz in care trebuie sa
+mutam fiecare linie astfel incat sa putrem umple cu succes marginile pozei,
+pentru a realiza operatia de no_crop.
+   OBS: mai avem si cazul in care poza ramane neschimbata, daca inaltimea este
+egala cu latimea. + SE SCHIMBA INFOHEADER-UL CU NOILE VALORI ALE INALTIMII, 
+RESPECTIV LATIMII.
+
+		TASK 3
+
+	Pentru rezolvarea acestui task am avut nevoie de crearea unei noi matrici,
+care sa reprezinte noua poza dorita, prin aplicarea filtrului dat in fisierul 
+corespunzator acestui task. Astfel, pentru fiecare pixel din poza initiala, vom
+forma zona acestuia, in functie de vecinii sai sau de marginile sale(daca
+pixelul se afla la marginea pozei sau "prea aproape" de aceasta), zona pe care
+o vom inmulti cu filtrul dat, inmultire realizata dupa regula bine cunoscuta de
+la matematica(kinda). Rezultatul obtinut prin aplicarea filtrului se va pune in
+noua matrice de pixeli creata, realizandu-se astfel noua poza dorita.
+
+		TASK 4
+
+	Taskul 4 este foarte asemanator cu cel anterior, deoarece presupune, din
+nou, crearea unei noi matrici de pixeli si formarea zonelor din jurul pixelilor,
+pentru ca mai apoi sa forma, noua poza, in functie de tipul de selectie ales(adica
+minPooling sau maxPooling), prin aflarea minimului/maximului pentru fiecare cod de
+culoare din rgb, iar apoi inlocuirea in noua matrice a valorilor cerute
+
+		TASK 5
+
+	Cel mai smecher task. Chiar nu vreau sa vorbesc mult despre el. Prima oara
+am reusit sa fac o metoda iterativa care dura 45 de minute la verificarea totala,
+cu bonus. Apoi am facut o varianta care dura 15 minute, pentru ca in final sa ajung
+la o eficienta de sub 30 de secunde, inclusiv bonus.
+	Ideea din cadrul acestui algoritm are la baza algoritmul lui Lee, de
+parcurgere si de umplere a matricii de pixeli pe zone. Dupa formarea acestor zone,
+memorate intr-o matrice de "frecventa", am facut, pentru fiecare zona in parte,
+suma pixelilor pe codul lor de culoare si am calculat numarul de pixeli din
+fiecare zona, pentru ca mai apoi sa obtinem pixelul corespunzator fiecarei zone.
+Desigur, avem si verificarea pentru treshold(asta intra deja in formarea zonelor).
+	In final, vom forma noua poza, prin inlocuirea in fiecare zona cu pixelul
+specific acesteia.
+
+
+
+
+
+
+
+
+
+
+
